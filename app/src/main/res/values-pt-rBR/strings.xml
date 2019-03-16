@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Previsão do Tempo</string>
+    <string name="action_settings">Configurações</string>
+    <string name="invalid_url">URL inválida</string>
+    <string name="weather_condition_image">Representação gráfica das condições climáticas</string>
+    <string name="high_temp">Máx: %s</string>
+    <string name="low_temp">Min: %s</string>
+    <string name="humidity">Umidade: %s</string>
+    <string name="hint_text">Digite o nome da cidade</string>
+    <string name="read_error">Não foi possível ler os dados</string>
+    <string name="connect_error">Não foi possível se conectar ao servidor</string>
+</resources>
