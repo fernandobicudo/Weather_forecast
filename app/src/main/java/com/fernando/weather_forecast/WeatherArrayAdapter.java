@@ -32,7 +32,7 @@ public class WeatherArrayAdapter extends ArrayAdapter<Weather> {
 
         TextView highTextView = caixa.findViewById(R.id.highTextView);
 
-        TextView humidityTextView = caixa.findViewById(R.id.umidityTextView);
+        TextView humidityTextView = caixa.findViewById(R.id.humidityTextView);
 
         dayTextView.setText(getContext().getString(R.string.day_description, caraDaVez.dayOfWeek, caraDaVez.description));
 
@@ -42,5 +42,4 @@ public class WeatherArrayAdapter extends ArrayAdapter<Weather> {
 
         return caixa;
     }
-
 }
