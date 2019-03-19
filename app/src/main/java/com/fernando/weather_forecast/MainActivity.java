@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText locationEditText;
     private List<Weather> previsoes = new ArrayList<>();
+
+
 
 
     @Override
@@ -64,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
                     resultado.append(linha);
                 }
                 JSONObject jsonInteiro = new JSONObject((resultado.toString()));
+
+                /* ***********************************************************
+                CÓDIGO COMENTADO SUBSTITUÍDO PELA SOLUÇÃO COM O GSON
+
                 JSONArray list = jsonInteiro.getJSONArray("list");
 
                 for (int i = 0; i < list.length(); i++) {
@@ -77,12 +86,20 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject unicoDoWeather = weather.getJSONObject(0);
                     String description = unicoDoWeather.getString("description");
                     String icon = unicoDoWeather.getString("icon");
+******************************************************************************* */
+                Gson gson = new GsonBuilder().create();
 
-                    Weather w = new Weather(dt, temp_min, temp_max, humidity, description, icon);
+                Weather w = gson.fromJson(reader, Weather.class);
+
+                /* **************************************************************
+                CÓDIGO COMENTADO SUBSTITUÍDO PELA SOLUÇÃO COM O GSON
+
+                Weather w = new Weather(dt, temp_min, temp_max, humidity, description, icon);
+******************************************************************************* */
 
                     previsoes.add(w);
 
-                }
+                //chave de fechamento do for comentado acima}
 
                 return resultado.toString();
 
