@@ -10,4 +10,6 @@
     <string name="hint_text">Digite o nome da cidade</string>
     <string name="read_error">Não foi possível ler os dados</string>
     <string name="connect_error">Não foi possível se conectar ao servidor</string>
+    <string name="measurement_unit" translatable="false">metric</string>
+    <string name="desc_language">pt</string>
 </resources>

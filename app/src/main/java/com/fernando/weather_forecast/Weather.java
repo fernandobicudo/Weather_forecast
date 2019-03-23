@@ -35,6 +35,6 @@ public class Weather {
         agora.setTimeInMillis(timeStamp * 1000);
         TimeZone tz = TimeZone.getDefault();
         agora.add(Calendar.MILLISECOND, tz.getOffset(agora.getTimeInMillis()));
-        return new SimpleDateFormat("EEEE").format(agora.getTime());
+        return new SimpleDateFormat("EEE, HH:mm").format(agora.getTime());
     }
 }

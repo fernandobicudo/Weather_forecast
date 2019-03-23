@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -28,7 +29,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private EditText locationEditText;
-    private List<Weather> previsoes = new ArrayList<>();
+    private ListView weatherListView;
+    private WeatherArrayAdapter weatherAdapter;
+    private List<Weather> weatherList = new ArrayList<>();
 
 
 
@@ -37,6 +40,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        weatherListView = findViewById(R.id.weatherListView);
+        weatherList = new ArrayList<>();
+        weatherAdapter = new WeatherArrayAdapter(this, weatherList);
+        weatherListView.setAdapter(weatherAdapter);
+
+
+
+
+        //ctrl q exibe documentação sobre os comandos;
+
+
         locationEditText = findViewById(R.id.locationEditText);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -44,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener((v)->{//expressão lambda substituindo o código original
             String cidade = locationEditText.getEditableText().toString();
-            String endereco = getString(R.string.web_service_url, cidade, getString(R.string.api_key),
+            String endereco = getString(R.string.web_service_url, getString(R.string.desc_language), cidade, getString(R.string.api_key),
                     getString(R.string.measurement_unit));
 
             new GetWeatherTask().execute(endereco);
@@ -72,8 +87,15 @@ public class MainActivity extends AppCompatActivity {
 
                 /* ***********************************************************
                 CÓDIGO COMENTADO SUBSTITUÍDO PELA SOLUÇÃO COM O GSON
-
+*/
                 JSONArray list = jsonInteiro.getJSONArray("list");
+
+                weatherList.clear();
+                runOnUiThread(()->{ weatherAdapter.notifyDataSetChanged();
+                    Toast.makeText(MainActivity.this, getString(R.string.new_search_started),
+                            Toast.LENGTH_SHORT).show();
+
+                });
 
                 for (int i = 0; i < list.length(); i++) {
                     JSONObject iesimo = list.getJSONObject(i);
@@ -86,20 +108,20 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject unicoDoWeather = weather.getJSONObject(0);
                     String description = unicoDoWeather.getString("description");
                     String icon = unicoDoWeather.getString("icon");
-******************************************************************************* */
-                Gson gson = new GsonBuilder().create();
 
-                Weather w = gson.fromJson(reader, Weather.class);
+/******************************************************************************* */
+//                Gson gson = new GsonBuilder().create();
+
+//                Weather w = gson.fromJson(reader, Weather.class);
 
                 /* **************************************************************
-                CÓDIGO COMENTADO SUBSTITUÍDO PELA SOLUÇÃO COM O GSON
+                CÓDIGO COMENTADO SUBSTITUÍDO PELA SOLUÇÃO COM O GSON*/
 
                 Weather w = new Weather(dt, temp_min, temp_max, humidity, description, icon);
-******************************************************************************* */
+/******************************************************************************* */
 
-                    previsoes.add(w);
-
-                //chave de fechamento do for comentado acima}
+                    weatherList.add(w);
+                }
 
                 return resultado.toString();
 
@@ -111,7 +133,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, s, Toast.LENGTH_LONG).show();
+
+            weatherAdapter.notifyDataSetChanged();
         }
     }
 
