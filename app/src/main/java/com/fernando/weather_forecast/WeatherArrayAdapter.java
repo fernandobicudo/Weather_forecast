@@ -40,8 +40,8 @@ public class WeatherArrayAdapter extends ArrayAdapter<Weather> {
         public TextView humidityTextView;
     }
 
-
-    private Map<String, Bitmap> figuras = new HashMap<>();
+    private Map<String, Bitmap> figuras = new HashMap<
+>();
 
     WeatherArrayAdapter(Context context, List<Weather> previsoes) {
         super(context, -1, previsoes);
@@ -94,8 +94,6 @@ public class WeatherArrayAdapter extends ArrayAdapter<Weather> {
             vh.conditionImageView = convertView.findViewById(R.id.conditionImageView);
 
             convertView.setTag(vh);
-
-
         }
         else
             //downcasting

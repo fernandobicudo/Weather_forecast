@@ -12,4 +12,5 @@
     <string name="connect_error">Não foi possível se conectar ao servidor</string>
     <string name="measurement_unit" translatable="false">metric</string>
     <string name="desc_language">pt</string>
+    <string name="new_search_started">Novo item para pesquisa</string>
 </resources>
