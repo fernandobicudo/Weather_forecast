@@ -46,11 +46,7 @@ public class MainActivity extends AppCompatActivity {
         weatherAdapter = new WeatherArrayAdapter(this, weatherList);
         weatherListView.setAdapter(weatherAdapter);
 
-
-
-
         //ctrl q exibe documentação sobre os comandos;
-
 
         locationEditText = findViewById(R.id.locationEditText);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -94,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(()->{ weatherAdapter.notifyDataSetChanged();
                     Toast.makeText(MainActivity.this, getString(R.string.new_search_started),
                             Toast.LENGTH_SHORT).show();
-
                 });
 
                 for (int i = 0; i < list.length(); i++) {
